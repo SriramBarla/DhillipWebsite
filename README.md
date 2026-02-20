@@ -15,7 +15,7 @@
         html {
             scroll-behavior: smooth;
         }
-
+       
         :root {
             --sunset-orange: #FF6B35;
             --deep-teal: #004E64;
@@ -183,14 +183,7 @@
         }
 
         .fbla-banner::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.1) 50%, transparent 70%);
-            animation: shimmer 3s infinite;
+            content: none;
         }
 
         @keyframes shimmer {
@@ -228,11 +221,11 @@
         }
 
         .hero-section {
-            background: linear-gradient(135deg, #f5f7fa 0%, #e8eef5 100%);
+            background: linear-gradient(135deg, #f7f8fa 0%, #eef1f5 100%);
             border-radius: 25px;
             padding: 4rem 3rem;
             margin-bottom: 3rem;
-            box-shadow: 0 20px 60px var(--shadow);
+            box-shadow: 0 12px 30px var(--shadow);
             text-align: center;
             animation: fadeIn 1s ease-out 0.2s both;
             position: relative;
@@ -243,31 +236,14 @@
         .hero-section::before {
             content: '';
             position: absolute;
-            bottom: -20px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 300px;
-            height: 250px;
-            background: linear-gradient(to bottom, #004E64 0%, #003d50 100%);
-            opacity: 0.05;
-            clip-path: polygon(
-                20% 100%, 20% 40%, 30% 40%, 30% 35%, 25% 30%, 25% 25%, 30% 25%, 30% 20%, 70% 20%, 70% 25%, 75% 25%, 75% 30%, 70% 35%, 70% 40%, 80% 40%, 80% 100%,
-                45% 100%, 45% 70%, 55% 70%, 55% 100%
-            );
+            inset: auto -10% -40% -10%;
+            height: 260px;
+            background: radial-gradient(circle at 40% 40%, rgba(0, 78, 100, 0.09), transparent 70%);
         }
 
         /* Clock tower/dome on top */
         .hero-section::after {
-            content: '';
-            position: absolute;
-            bottom: 210px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 80px;
-            background: linear-gradient(to bottom, #FF6B35 0%, #ff8555 100%);
-            opacity: 0.1;
-            clip-path: polygon(0% 60%, 0% 100%, 100% 100%, 100% 60%, 80% 40%, 80% 0%, 50% 20%, 20% 0%, 20% 40%);
+            content: none;
         }
 
         .hero-content {
@@ -302,11 +278,11 @@
 
         /* Statistics Section */
         .stats-section {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #315c79 0%, #3f7fa0 100%);
             border-radius: 25px;
             padding: 3rem 2rem;
             margin-bottom: 3rem;
-            box-shadow: 0 20px 60px rgba(102, 126, 234, 0.3);
+            box-shadow: 0 14px 36px rgba(0, 78, 100, 0.28);
             animation: fadeIn 1s ease-out 0.4s both;
         }
 
@@ -857,6 +833,7 @@
             transition: all 0.3s ease;
             opacity: 0;
             transform: translateY(30px);
+            border: 1px solid rgba(0, 78, 100, 0.08);
         }
 
         .business-card.visible {
@@ -890,6 +867,46 @@
             background: linear-gradient(135deg, var(--deep-teal) 0%, #006D85 100%);
             padding: 1.5rem;
             color: white;
+            min-height: 170px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            position: relative;
+            isolation: isolate;
+        }
+
+        .business-header::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            opacity: 0.36;
+            z-index: -2;
+        }
+
+        .business-header::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.48), rgba(0, 0, 0, 0.1));
+            z-index: -1;
+        }
+
+        .business-header.cat-food::before {
+            background-image: url('https://images.unsplash.com/photo-1498837167922-ddd27525d352?auto=format&fit=crop&w=1200&q=80');
+        }
+
+        .business-header.cat-services::before {
+            background-image: url('https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=1200&q=80');
+        }
+
+        .business-header.cat-health::before {
+            background-image: url('https://images.unsplash.com/photo-1571019613914-85f342c55f4b?auto=format&fit=crop&w=1200&q=80');
+        }
+
+        .business-header.cat-retail::before {
+            background-image: url('https://images.unsplash.com/photo-1556740738-b6a63e27c4df?auto=format&fit=crop&w=1200&q=80');
         }
 
         .business-name {
@@ -1197,6 +1214,8 @@
             display: none !important;
         }
     </style>
+
+    <!-- The below code represents the disclaimer that informs users of true purpose of website -->
 </head>
 <body>
     <!-- FBLA Disclaimer Overlay -->
@@ -1214,7 +1233,7 @@
             <p class="disclaimer-text">
                 By clicking "I Understand," you acknowledge that this is a student project and all content is simulated.
             </p>
-            <button class="btn btn-primary" onclick="acceptDisclaimer()">✓ I Understand</button>
+            <button type="button" class="btn btn-primary" onclick="acceptDisclaimer()">✓ I Understand</button>
         </div>
     </div>
 
@@ -1233,16 +1252,16 @@
         <div class="hero-section">
             <div class="hero-content">
                 <h1>TownSquare</h1>
-                <p class="tagline">Your guide to our beautiful town</p>
-                <p class="hero-subtitle">Discover local gems, read authentic reviews, and support the businesses that make our community thrive. Welcome home.</p>
+                <p class="tagline">Local picks from local people</p>
+                <p class="hero-subtitle">Find great nearby spots, read honest feedback, and keep track of your own favorites in one place.</p>
             </div>
         </div>
 
         <!-- Auth Section -->
         <div id="authSection" class="auth-container">
             <div class="auth-toggle">
-                <button class="auth-tab active" onclick="switchAuthTab('login')">Login</button>
-                <button class="auth-tab" onclick="switchAuthTab('register')">Register</button>
+                <button type="button" class="auth-tab active" onclick="switchAuthTab('login')">Login</button>
+                <button type="button" class="auth-tab" onclick="switchAuthTab('register')">Register</button>
             </div>
 
             <div id="loginForm">
@@ -1254,7 +1273,7 @@
                     <label>Password</label>
                     <input type="password" id="loginPassword" placeholder="Enter your password">
                 </div>
-                <button class="btn btn-primary" onclick="login()">Login</button>
+                <button type="button" class="btn btn-primary" onclick="login()">Login</button>
                 <p style="margin-top: 1rem; text-align: center; color: #666; font-size: 0.9rem;">Demo account: username: <strong>demo</strong>, password: <strong>demo123</strong></p>
             </div>
 
@@ -1267,7 +1286,7 @@
                     <label>Password</label>
                     <input type="password" id="regPassword" placeholder="Choose a password (min 4 characters)">
                 </div>
-                <button class="btn btn-primary" onclick="register()">Create Account</button>
+                <button type="button" class="btn btn-primary" onclick="register()">Create Account</button>
             </div>
         </div>
 
@@ -1276,13 +1295,13 @@
             <div class="user-bar">
                 <div class="user-info">Welcome, <span id="currentUser">User</span>!</div>
                 <div class="user-controls">
-                    <button class="dark-mode-toggle" onclick="toggleDarkMode()">
+                    <button type="button" class="dark-mode-toggle" onclick="toggleDarkMode()">
                         <span id="darkModeIcon">🌙</span>
                         <span id="darkModeText">Dark Mode</span>
                     </button>
-                    <button class="btn btn-secondary" onclick="toggleProfile()">👤 Profile</button>
-                    <button class="btn btn-secondary" onclick="showHelp()">❓ Help</button>
-                    <button class="btn btn-secondary" onclick="logout()">Logout</button>
+                    <button type="button" class="btn btn-secondary" onclick="toggleProfile()">👤 Profile</button>
+                    <button type="button" class="btn btn-secondary" onclick="showHelp()">❓ Help</button>
+                    <button type="button" class="btn btn-secondary" onclick="logout()">Logout</button>
                 </div>
             </div>
 
@@ -1363,46 +1382,46 @@
 
             <!-- Navigation Taskbar -->
             <div id="navigationTaskbar" class="nav-taskbar">
-                <button class="nav-tab-btn active" data-section="browse" onclick="switchTab('browse')">
+                <button type="button" class="nav-tab-btn active" data-section="browse" onclick="switchTab('browse')">
                     <span class="nav-icon-small">🏪</span>
-                    <span>Browse Businesses</span>
+                    <span>Explore</span>
                 </button>
-                <button class="nav-tab-btn" data-section="favorites" onclick="switchTab('favorites')">
+                <button type="button" class="nav-tab-btn" data-section="favorites" onclick="switchTab('favorites')">
                     <span class="nav-icon-small">💙</span>
                     <span>My Favorites</span>
                 </button>
-                <button class="nav-tab-btn" data-section="deals" onclick="switchTab('deals')">
+                <button type="button" class="nav-tab-btn" data-section="deals" onclick="switchTab('deals')">
                     <span class="nav-icon-small">💰</span>
                     <span>Hot Deals</span>
                 </button>
-                <button class="nav-tab-btn" data-section="recommendations" onclick="switchTab('recommendations')">
+                <button type="button" class="nav-tab-btn" data-section="recommendations" onclick="switchTab('recommendations')">
                     <span class="nav-icon-small">🎯</span>
-                    <span>Recommended</span>
+                    <span>For You</span>
                 </button>
             </div>
 
             <!-- Browse Section -->
             <div id="browseSection" class="content-section">
                 <div class="section-header">
-                    <h2 class="section-title">All Businesses</h2>
-                    <button class="btn btn-secondary" onclick="sortByRating()">Sort by Rating</button>
+                    <h2 class="section-title">Businesses</h2>
+                    <button type="button" id="sortByRatingBtn" class="btn btn-secondary" onclick="sortByRating()">Sort by Rating</button>
                 </div>
 
                 <div class="category-filter">
                     <span style="font-weight: 600; color: var(--text-primary);">Categories:</span>
-                    <button class="category-pill active" onclick="filterByCategory('all')">All</button>
-                    <button class="category-pill" onclick="filterByCategory('Food & Dining')">🍽️ Food & Dining</button>
-                    <button class="category-pill" onclick="filterByCategory('Services')">🔧 Services</button>
-                    <button class="category-pill" onclick="filterByCategory('Health & Wellness')">💪 Health & Wellness</button>
-                    <button class="category-pill" onclick="filterByCategory('Retail')">🛍️ Retail</button>
+                    <button type="button" class="category-pill active" onclick="filterByCategory('all', this)">All</button>
+                    <button type="button" class="category-pill" onclick="filterByCategory('Food & Dining', this)">🍽️ Food & Dining</button>
+                    <button type="button" class="category-pill" onclick="filterByCategory('Services', this)">🔧 Services</button>
+                    <button type="button" class="category-pill" onclick="filterByCategory('Health & Wellness', this)">💪 Health & Wellness</button>
+                    <button type="button" class="category-pill" onclick="filterByCategory('Retail', this)">🛍️ Retail</button>
                 </div>
 
                 <div class="filter-controls">
                     <span class="filter-label">Filter by:</span>
-                    <button class="filter-btn active" onclick="filterReviews('all')">All Businesses</button>
-                    <button class="filter-btn" onclick="filterReviews('positive')">Mostly Positive</button>
-                    <button class="filter-btn" onclick="filterReviews('negative')">Has Negative Reviews</button>
-                    <button class="filter-btn" onclick="filterReviews('highly-rated')">4+ Stars</button>
+                    <button type="button" class="filter-btn active" onclick="filterReviews('all', this)">All</button>
+                    <button type="button" class="filter-btn" onclick="filterReviews('positive', this)">Mostly Positive</button>
+                    <button type="button" class="filter-btn" onclick="filterReviews('negative', this)">Has Negative Reviews</button>
+                    <button type="button" class="filter-btn" onclick="filterReviews('highly-rated', this)">4+ Stars</button>
                 </div>
 
                 <div class="search-bar">
@@ -1431,7 +1450,7 @@
             <!-- Recommendations Section -->
             <div id="recommendationsSection" class="content-section">
                 <div class="section-header">
-                    <h2 class="section-title">Recommended for You</h2>
+                    <h2 class="section-title">Picked for You</h2>
                 </div>
                 <div id="recommendationsGrid" class="business-grid"></div>
             </div>
@@ -1468,7 +1487,7 @@
                 </div>
             </div>
 
-            <button class="btn btn-primary" onclick="submitReview()">Submit Review</button>
+            <button type="button" class="btn btn-primary" onclick="submitReview()">Submit Review</button>
         </div>
     </div>
 
@@ -1476,12 +1495,12 @@
     <div id="helpModal" class="modal">
         <div class="modal-content">
             <span class="close-modal" onclick="closeHelpModal()">×</span>
-            <h3 class="modal-header">📖 TownSquare Help Guide</h3>
+            <h3 class="modal-header">📖 Quick Help</h3>
             
             <div style="max-height: 400px; overflow-y: auto;">
                 <h4 style="color: var(--sunset-orange); margin-top: 1rem;">🏪 Browse Businesses</h4>
                 <ul style="line-height: 1.8; color: var(--text-primary);">
-                    <li>Click "Browse Businesses" to see all local businesses</li>
+                    <li>Use "Explore" to see all local businesses</li>
                     <li>Use category filters to narrow by type</li>
                     <li>Use review filters to find highly-rated businesses</li>
                     <li>Search by name or category</li>
@@ -1497,7 +1516,7 @@
 
                 <h4 style="color: var(--sunset-orange); margin-top: 1rem;">💙 Favorites</h4>
                 <ul style="line-height: 1.8; color: var(--text-primary);">
-                    <li>Click the heart button to save favorites</li>
+                    <li>Click the favorite button to save places</li>
                     <li>View all favorites in "My Favorites" tab</li>
                     <li>Get personalized recommendations based on your favorites</li>
                 </ul>
@@ -1505,7 +1524,7 @@
                 <h4 style="color: var(--sunset-orange); margin-top: 1rem;">💰 Hot Deals</h4>
                 <ul style="line-height: 1.8; color: var(--text-primary);">
                     <li>View current deals and special offers</li>
-                    <li>All businesses display their latest promotions</li>
+                    <li>Each listing shows its current promotion</li>
                 </ul>
 
                 <h4 style="color: var(--sunset-orange); margin-top: 1rem;">👤 Profile</h4>
@@ -1523,7 +1542,7 @@
             </div>
 
             <p style="margin-top: 2rem; text-align: center; color: var(--text-secondary);">
-                Need more help? Contact support@townsquare.com
+                Need help? Reach us at support@townsquare.com
             </p>
         </div>
     </div>
@@ -1700,8 +1719,54 @@
         let captchaChecked = false;
         let currentFilter = 'all';
         let currentCategory = 'all';
+        let currentSort = 'default';
         let allBusinesses = [...businesses];
         let activityLog = [];
+        const APP_STORAGE_KEY = 'townsquare-app-state-v1';
+
+        function cloneData(data) {
+            return JSON.parse(JSON.stringify(data));
+        }
+
+        function saveAppState() {
+            try {
+                localStorage.setItem(APP_STORAGE_KEY, JSON.stringify({
+                    users,
+                    allBusinesses,
+                    activityLog
+                }));
+            } catch (error) {
+                console.error('Failed to save app state:', error);
+            }
+        }
+
+        function loadAppState() {
+            try {
+                const saved = localStorage.getItem(APP_STORAGE_KEY);
+                if (!saved) return;
+
+                const parsed = JSON.parse(saved);
+                if (parsed && parsed.users && parsed.allBusinesses) {
+                    users = parsed.users;
+                    allBusinesses = parsed.allBusinesses;
+                    activityLog = Array.isArray(parsed.activityLog) ? parsed.activityLog : [];
+                }
+            } catch (error) {
+                console.error('Failed to load app state:', error);
+                users = cloneData({
+                    demo: {
+                        password: "demo123",
+                        favorites: [1, 5],
+                        reviews: [],
+                        reviewInteractions: {}
+                    }
+                });
+                allBusinesses = cloneData(businesses);
+                activityLog = [];
+            }
+        }
+
+        loadAppState();
 
         // Dark Mode
         function toggleDarkMode() {
@@ -1816,6 +1881,7 @@
             };
             activityLog.unshift(activity);
             if (activityLog.length > 10) activityLog.pop();
+            saveAppState();
         }
 
         function updateActivityFeed() {
@@ -1895,14 +1961,15 @@
         }
 
         // Category Filter
-        function filterByCategory(category) {
+        function filterByCategory(category, buttonElement) {
             currentCategory = category;
             
-            // Update active category pill
             document.querySelectorAll('.category-pill').forEach(pill => {
                 pill.classList.remove('active');
             });
-            event.target.classList.add('active');
+            if (buttonElement) {
+                buttonElement.classList.add('active');
+            }
             
             applyCurrentFilter();
         }
@@ -1933,7 +2000,7 @@
             const password = document.getElementById('loginPassword').value;
 
             if (!username || !password) {
-                alert('Please enter both username and password');
+                alert('Enter both username and password.');
                 return;
             }
 
@@ -1950,8 +2017,9 @@
                 setTimeout(() => {
                     triggerScrollAnimations();
                 }, 100);
+                saveAppState();
             } else {
-                alert('❌ Invalid credentials');
+                alert('That username/password combination was not found.');
             }
         }
 
@@ -1960,17 +2028,17 @@
             const password = document.getElementById('regPassword').value;
 
             if (!username || !password) {
-                alert('Please fill in all fields');
+                alert('Fill in all fields to continue.');
                 return;
             }
 
             if (password.length < 4) {
-                alert('Password must be at least 4 characters');
+                alert('Password must be at least 4 characters.');
                 return;
             }
 
             if (users[username]) {
-                alert('Username already exists');
+                alert('That username is already taken.');
                 return;
             }
 
@@ -1981,7 +2049,8 @@
                 reviewInteractions: {}
             };
 
-            alert('✅ Account created! Please login.');
+            alert('Account created. You can log in now.');
+            saveAppState();
             switchAuthTab('login');
         }
 
@@ -1991,6 +2060,7 @@
             document.getElementById('authSection').classList.remove('hidden');
             document.getElementById('loginUsername').value = '';
             document.getElementById('loginPassword').value = '';
+            saveAppState();
         }
 
         // Business Functions
@@ -2019,10 +2089,19 @@
             const isFavorite = users[currentUser].favorites.includes(business.id);
             const stars = avg > 0 ? '⭐'.repeat(Math.round(avg)) : 'No ratings yet';
             const stats = getReviewStats(business);
+            const categoryClassMap = {
+                'Food & Dining': 'cat-food',
+                'Services': 'cat-services',
+                'Health & Wellness': 'cat-health',
+                'Retail': 'cat-retail'
+            };
+            const headerClass = categoryClassMap[business.category] || '';
+            const recentReviews = business.reviews.slice(-2);
+            const reviewOffset = business.reviews.length - recentReviews.length;
 
             return `
                 <div class="business-card">
-                    <div class="business-header">
+                    <div class="business-header ${headerClass}">
                         <div class="business-name">${business.name}</div>
                         <span class="business-category">${business.category}</span>
                     </div>
@@ -2040,8 +2119,9 @@
                         ${business.reviews.length > 0 ? `
                             <div style="margin-top: 1rem;">
                                 <strong style="color: var(--deep-teal);">Recent Reviews:</strong>
-                                ${business.reviews.slice(-2).map((r, idx) => {
-                                    const reviewId = getReviewId(business.id, business.reviews.length - 2 + idx);
+                                ${recentReviews.map((r, idx) => {
+                                    const reviewIndex = reviewOffset + idx;
+                                    const reviewId = getReviewId(business.id, reviewIndex);
                                     const userInteraction = users[currentUser].reviewInteractions[reviewId];
                                     return `
                                     <div class="review-item">
@@ -2051,24 +2131,24 @@
                                         </div>
                                         <div>${r.text}</div>
                                         <div class="review-actions">
-                                            <button class="review-action-btn ${userInteraction === 'like' ? 'liked' : ''}" 
-                                                    onclick="likeReview(${business.id}, ${business.reviews.length - 2 + idx})">
+                                            <button type="button" class="review-action-btn ${userInteraction === 'like' ? 'liked' : ''}" 
+                                                    onclick="likeReview(${business.id}, ${reviewIndex})">
                                                 👍 ${r.likes}
                                             </button>
-                                            <button class="review-action-btn ${userInteraction === 'dislike' ? 'disliked' : ''}" 
-                                                    onclick="dislikeReview(${business.id}, ${business.reviews.length - 2 + idx})">
+                                            <button type="button" class="review-action-btn ${userInteraction === 'dislike' ? 'disliked' : ''}" 
+                                                    onclick="dislikeReview(${business.id}, ${reviewIndex})">
                                                 👎 ${r.dislikes}
                                             </button>
                                         </div>
                                     </div>
                                 `}).join('')}
                             </div>
-                        ` : '<p style="color: #666; text-align: center; margin: 1rem 0;">No reviews yet. Be the first!</p>'}
+                        ` : '<p style="color: #666; text-align: center; margin: 1rem 0;">No reviews yet. Add the first one.</p>'}
                         <div class="business-actions">
-                            <button class="btn btn-primary btn-small" onclick="openReviewModal(${business.id})">
+                            <button type="button" class="btn btn-primary btn-small" onclick="openReviewModal(${business.id})">
                                 ✍️ Review
                             </button>
-                            <button class="btn btn-secondary btn-small" onclick="toggleFavorite(${business.id})">
+                            <button type="button" class="btn btn-secondary btn-small" onclick="toggleFavorite(${business.id})">
                                 ${isFavorite ? '💙 Favorited' : '🤍 Favorite'}
                             </button>
                         </div>
@@ -2083,8 +2163,8 @@
                 container.innerHTML = `
                     <div class="empty-state">
                         <div class="empty-icon">🏪</div>
-                        <h3>No businesses found</h3>
-                        <p>Try adjusting your search or filters</p>
+                        <h3>No matches right now</h3>
+                        <p>Try a different search or filter.</p>
                     </div>
                 `;
                 return;
@@ -2110,6 +2190,7 @@
                 users[currentUser].reviewInteractions[reviewId] = 'like';
             }
 
+            saveAppState();
             refreshCurrentView();
         }
 
@@ -2130,11 +2211,13 @@
                 users[currentUser].reviewInteractions[reviewId] = 'dislike';
             }
 
+            saveAppState();
             refreshCurrentView();
         }
 
         function refreshCurrentView() {
             const activeSection = document.querySelector('.content-section.active');
+            if (!activeSection) return;
             if (activeSection.id === 'browseSection') {
                 applyCurrentFilter();
             } else if (activeSection.id === 'favoritesSection') {
@@ -2146,37 +2229,20 @@
         function filterReviews(type, buttonElement) {
             currentFilter = type;
             
-            // Update button states - remove active from all, add to clicked
             document.querySelectorAll('.filter-btn').forEach(btn => {
                 btn.classList.remove('active');
             });
-            
-            // Add active class based on type
-            const filterButtons = {
-                'all': 0,
-                'positive': 1,
-                'negative': 2,
-                'highly-rated': 3
-            };
-            
-            const buttons = document.querySelectorAll('.filter-btn');
-            if (buttons[filterButtons[type]]) {
-                buttons[filterButtons[type]].classList.add('active');
+            if (buttonElement) {
+                buttonElement.classList.add('active');
             }
 
             applyCurrentFilter();
         }
 
-        function applyCurrentFilter() {
+        function getFilteredBusinesses() {
             let filtered = [...allBusinesses];
-            console.log('Starting filter. Total businesses:', filtered.length);
-            console.log('Current filter:', currentFilter);
-            console.log('Current category:', currentCategory);
-
-            // Apply category filter first
             if (currentCategory !== 'all') {
                 filtered = filtered.filter(b => b.category === currentCategory);
-                console.log('After category filter:', filtered.length);
             }
 
             if (currentFilter === 'positive') {
@@ -2184,28 +2250,40 @@
                     const stats = getReviewStats(b);
                     return stats.positive > stats.negative && stats.positive > 0;
                 });
-                console.log('After positive filter:', filtered.length);
             } else if (currentFilter === 'negative') {
                 filtered = filtered.filter(b => {
                     const stats = getReviewStats(b);
                     return stats.negative > 0;
                 });
-                console.log('After negative filter:', filtered.length);
             } else if (currentFilter === 'highly-rated') {
                 filtered = filtered.filter(b => parseFloat(getAverageRating(b)) >= 4);
-                console.log('After highly-rated filter:', filtered.length);
             }
 
-            const searchQuery = document.getElementById('searchInput').value.toLowerCase();
+            const searchQuery = document.getElementById('searchInput').value.trim().toLowerCase();
             if (searchQuery) {
                 filtered = filtered.filter(b => 
                     b.name.toLowerCase().includes(searchQuery) || 
                     b.category.toLowerCase().includes(searchQuery)
                 );
-                console.log('After search filter:', filtered.length);
             }
 
-            console.log('Rendering businesses:', filtered.length);
+            return filtered;
+        }
+
+        function applyCurrentSort(businessList) {
+            const sorted = [...businessList];
+            if (currentSort === 'rating') {
+                sorted.sort((a, b) => {
+                    const avgA = parseFloat(getAverageRating(a)) || 0;
+                    const avgB = parseFloat(getAverageRating(b)) || 0;
+                    return avgB - avgA;
+                });
+            }
+            return sorted;
+        }
+
+        function applyCurrentFilter() {
+            const filtered = applyCurrentSort(getFilteredBusinesses());
             renderBusinesses(filtered, 'businessGrid');
         }
 
@@ -2253,41 +2331,12 @@
         }
 
         function sortByRating() {
-            // Get currently displayed businesses and sort them
-            let currentBusinesses = [...allBusinesses];
-            
-            // Apply current filter first
-            if (currentFilter === 'positive') {
-                currentBusinesses = currentBusinesses.filter(b => {
-                    const stats = getReviewStats(b);
-                    return stats.positive > stats.negative && stats.positive > 0;
-                });
-            } else if (currentFilter === 'negative') {
-                currentBusinesses = currentBusinesses.filter(b => {
-                    const stats = getReviewStats(b);
-                    return stats.negative > 0;
-                });
-            } else if (currentFilter === 'highly-rated') {
-                currentBusinesses = currentBusinesses.filter(b => parseFloat(getAverageRating(b)) >= 4);
+            currentSort = currentSort === 'rating' ? 'default' : 'rating';
+            const button = document.getElementById('sortByRatingBtn');
+            if (button) {
+                button.textContent = currentSort === 'rating' ? 'Sorted by Rating (Show Default)' : 'Sort by Rating';
             }
-            
-            // Apply search if active
-            const searchQuery = document.getElementById('searchInput').value.toLowerCase();
-            if (searchQuery) {
-                currentBusinesses = currentBusinesses.filter(b => 
-                    b.name.toLowerCase().includes(searchQuery) || 
-                    b.category.toLowerCase().includes(searchQuery)
-                );
-            }
-            
-            // Now sort
-            currentBusinesses.sort((a, b) => {
-                const avgA = parseFloat(getAverageRating(a)) || 0;
-                const avgB = parseFloat(getAverageRating(b)) || 0;
-                return avgB - avgA;
-            });
-            
-            renderBusinesses(currentBusinesses, 'businessGrid');
+            applyCurrentFilter();
         }
 
         function searchBusinesses() {
@@ -2307,6 +2356,7 @@
                 addActivity(`Added ${business.name} to favorites ❤️`);
             }
             
+            saveAppState();
             refreshCurrentView();
         }
 
@@ -2380,18 +2430,18 @@
 
         function submitReview() {
             if (!captchaChecked) {
-                alert('⚠️ Please verify that you are not a robot');
+                alert('Please complete the "I\'m not a robot" check.');
                 return;
             }
 
             if (selectedRating === 0) {
-                alert('⚠️ Please select a rating');
+                alert('Choose a rating before submitting.');
                 return;
             }
 
             const text = document.getElementById('reviewText').value.trim();
             if (!text) {
-                alert('⚠️ Please write a review');
+                alert('Write a short review before submitting.');
                 return;
             }
 
@@ -2410,7 +2460,8 @@
 
             addActivity(`Reviewed ${business.name} - ${selectedRating}⭐`);
             
-            alert('✅ Review submitted successfully!');
+            alert('Thanks. Your review was submitted.');
+            saveAppState();
             closeReviewModal();
             refreshCurrentView();
         }
