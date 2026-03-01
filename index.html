@@ -637,13 +637,16 @@
             background: white;
             border-radius: 15px;
             padding: 1rem 2rem;
-            margin-bottom: 3rem;
+            margin-bottom: 1rem;
             box-shadow: 0 5px 20px var(--shadow);
             display: flex;
             gap: 0.5rem;
             flex-wrap: wrap;
             justify-content: center;
             align-items: center;
+            position: sticky;
+            top: 0.75rem;
+            z-index: 30;
             opacity: 0;
             transform: translateY(-20px);
             transition: all 0.5s ease-out;
@@ -817,6 +820,70 @@
             border-color: var(--sunset-orange);
         }
 
+        .top-action-row {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 1rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 20px var(--shadow);
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .dropdown-wrap {
+            position: relative;
+        }
+
+        .dropdown-trigger {
+            border: 2px solid #e8e8e8;
+            background: #fff;
+            color: var(--text-primary);
+            border-radius: 10px;
+            padding: 0.75rem 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            min-width: 240px;
+            text-align: left;
+        }
+
+        .dropdown-trigger:hover {
+            border-color: var(--sunset-orange);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 0.5rem);
+            left: 0;
+            min-width: 240px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            padding: 0.5rem;
+            display: none;
+            z-index: 40;
+        }
+
+        .dropdown-menu.open {
+            display: block;
+        }
+
+        .dropdown-option {
+            width: 100%;
+            border: none;
+            background: transparent;
+            padding: 0.6rem 0.7rem;
+            border-radius: 8px;
+            text-align: left;
+            cursor: pointer;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .dropdown-option:hover {
+            background: rgba(255, 107, 53, 0.1);
+        }
+
         /* Business Cards */
         .business-grid {
             display: grid;
@@ -883,6 +950,7 @@
             background-position: center;
             opacity: 0.36;
             z-index: -2;
+            background-image: var(--business-image, url('https://picsum.photos/id/1043/1200/800'));
         }
 
         .business-header::after {
@@ -907,6 +975,10 @@
 
         .business-header.cat-retail::before {
             background-image: url('https://images.unsplash.com/photo-1556740738-b6a63e27c4df?auto=format&fit=crop&w=1200&q=80');
+        }
+
+        .business-header.cat-default::before {
+            background-image: url('https://picsum.photos/id/1043/1200/800');
         }
 
         .business-name {
@@ -1208,6 +1280,16 @@
                 flex-direction: column;
                 align-items: stretch;
             }
+
+            .top-action-row {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .dropdown-trigger,
+            .dropdown-menu {
+                min-width: 100%;
+            }
         }
 
         .hidden {
@@ -1305,6 +1387,43 @@
                 </div>
             </div>
 
+            <div id="navigationTaskbar" class="nav-taskbar">
+                <button type="button" class="nav-tab-btn active" data-section="browse" onclick="switchTab('browse')">
+                    <span class="nav-icon-small">Explore</span>
+                </button>
+                <button type="button" class="nav-tab-btn" data-section="favorites" onclick="switchTab('favorites')">
+                    <span class="nav-icon-small">Favorites</span>
+                </button>
+                <button type="button" class="nav-tab-btn" data-section="deals" onclick="switchTab('deals')">
+                    <span class="nav-icon-small">Deals</span>
+                </button>
+                <button type="button" class="nav-tab-btn" data-section="recommendations" onclick="switchTab('recommendations')">
+                    <span class="nav-icon-small">For You</span>
+                </button>
+            </div>
+
+            <div id="browseTopControls" class="top-action-row">
+                <div class="dropdown-wrap">
+                    <button type="button" class="dropdown-trigger" id="categoryDropdownBtn" onclick="toggleDropdown('categoryDropdownMenu')">Category: All</button>
+                    <div class="dropdown-menu" id="categoryDropdownMenu">
+                        <button type="button" class="dropdown-option" onclick="selectCategoryOption('all')">All</button>
+                        <button type="button" class="dropdown-option" onclick="selectCategoryOption('food')">Food & Dining</button>
+                        <button type="button" class="dropdown-option" onclick="selectCategoryOption('services')">Services</button>
+                        <button type="button" class="dropdown-option" onclick="selectCategoryOption('health')">Health & Wellness</button>
+                        <button type="button" class="dropdown-option" onclick="selectCategoryOption('retail')">Retail</button>
+                    </div>
+                </div>
+                <div class="dropdown-wrap">
+                    <button type="button" class="dropdown-trigger" id="reviewDropdownBtn" onclick="toggleDropdown('reviewDropdownMenu')">Filter: All</button>
+                    <div class="dropdown-menu" id="reviewDropdownMenu">
+                        <button type="button" class="dropdown-option" onclick="selectReviewFilterOption('all')">All</button>
+                        <button type="button" class="dropdown-option" onclick="selectReviewFilterOption('positive')">Mostly Positive</button>
+                        <button type="button" class="dropdown-option" onclick="selectReviewFilterOption('negative')">Has Negative Reviews</button>
+                        <button type="button" class="dropdown-option" onclick="selectReviewFilterOption('highly-rated')">4+ Stars</button>
+                    </div>
+                </div>
+            </div>
+
             <!-- Profile Section -->
             <div id="profileSection" class="profile-section hidden">
                 <div class="profile-stat">
@@ -1380,48 +1499,11 @@
                 </div>
             </div>
 
-            <!-- Navigation Taskbar -->
-            <div id="navigationTaskbar" class="nav-taskbar">
-                <button type="button" class="nav-tab-btn active" data-section="browse" onclick="switchTab('browse')">
-                    <span class="nav-icon-small">🏪</span>
-                    <span>Explore</span>
-                </button>
-                <button type="button" class="nav-tab-btn" data-section="favorites" onclick="switchTab('favorites')">
-                    <span class="nav-icon-small">💙</span>
-                    <span>My Favorites</span>
-                </button>
-                <button type="button" class="nav-tab-btn" data-section="deals" onclick="switchTab('deals')">
-                    <span class="nav-icon-small">💰</span>
-                    <span>Hot Deals</span>
-                </button>
-                <button type="button" class="nav-tab-btn" data-section="recommendations" onclick="switchTab('recommendations')">
-                    <span class="nav-icon-small">🎯</span>
-                    <span>For You</span>
-                </button>
-            </div>
-
             <!-- Browse Section -->
             <div id="browseSection" class="content-section">
                 <div class="section-header">
                     <h2 class="section-title">Businesses</h2>
                     <button type="button" id="sortByRatingBtn" class="btn btn-secondary" onclick="sortByRating()">Sort by Rating</button>
-                </div>
-
-                <div class="category-filter">
-                    <span style="font-weight: 600; color: var(--text-primary);">Categories:</span>
-                    <button type="button" class="category-pill active" onclick="filterByCategory('all', this)">All</button>
-                    <button type="button" class="category-pill" onclick="filterByCategory('Food & Dining', this)">🍽️ Food & Dining</button>
-                    <button type="button" class="category-pill" onclick="filterByCategory('Services', this)">🔧 Services</button>
-                    <button type="button" class="category-pill" onclick="filterByCategory('Health & Wellness', this)">💪 Health & Wellness</button>
-                    <button type="button" class="category-pill" onclick="filterByCategory('Retail', this)">🛍️ Retail</button>
-                </div>
-
-                <div class="filter-controls">
-                    <span class="filter-label">Filter by:</span>
-                    <button type="button" class="filter-btn active" onclick="filterReviews('all', this)">All</button>
-                    <button type="button" class="filter-btn" onclick="filterReviews('positive', this)">Mostly Positive</button>
-                    <button type="button" class="filter-btn" onclick="filterReviews('negative', this)">Has Negative Reviews</button>
-                    <button type="button" class="filter-btn" onclick="filterReviews('highly-rated', this)">4+ Stars</button>
                 </div>
 
                 <div class="search-bar">
@@ -1960,9 +2042,60 @@
             alert('✅ Report exported successfully!');
         }
 
+        function closeDropdowns() {
+            document.querySelectorAll('.dropdown-menu').forEach(menu => menu.classList.remove('open'));
+        }
+
+        function toggleDropdown(menuId) {
+            const targetMenu = document.getElementById(menuId);
+            if (!targetMenu) return;
+            const shouldOpen = !targetMenu.classList.contains('open');
+            closeDropdowns();
+            if (shouldOpen) targetMenu.classList.add('open');
+        }
+
+        function getCategoryLabel(key) {
+            const labels = {
+                all: 'All',
+                food: 'Food & Dining',
+                services: 'Services',
+                health: 'Health & Wellness',
+                retail: 'Retail'
+            };
+            return labels[key] || 'All';
+        }
+
+        function getFilterLabel(key) {
+            const labels = {
+                all: 'All',
+                positive: 'Mostly Positive',
+                negative: 'Has Negative Reviews',
+                'highly-rated': '4+ Stars'
+            };
+            return labels[key] || 'All';
+        }
+
+        function updateTopControlLabels() {
+            const categoryBtn = document.getElementById('categoryDropdownBtn');
+            const reviewBtn = document.getElementById('reviewDropdownBtn');
+            if (categoryBtn) categoryBtn.textContent = `Category: ${getCategoryLabel(currentCategory)}`;
+            if (reviewBtn) reviewBtn.textContent = `Filter: ${getFilterLabel(currentFilter)}`;
+        }
+
+        function selectCategoryOption(category) {
+            filterByCategory(category);
+            closeDropdowns();
+        }
+
+        function selectReviewFilterOption(type) {
+            filterReviews(type);
+            closeDropdowns();
+        }
+
         // Category Filter
         function filterByCategory(category, buttonElement) {
-            currentCategory = category;
+            currentCategory = String(category || 'all').toLowerCase();
+            currentFilter = 'all';
             
             document.querySelectorAll('.category-pill').forEach(pill => {
                 pill.classList.remove('active');
@@ -1970,6 +2103,11 @@
             if (buttonElement) {
                 buttonElement.classList.add('active');
             }
+
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            if (filterButtons[0]) filterButtons[0].classList.add('active');
+            updateTopControlLabels();
             
             applyCurrentFilter();
         }
@@ -2089,19 +2227,36 @@
             const isFavorite = users[currentUser].favorites.includes(business.id);
             const stars = avg > 0 ? '⭐'.repeat(Math.round(avg)) : 'No ratings yet';
             const stats = getReviewStats(business);
-            const categoryClassMap = {
-                'Food & Dining': 'cat-food',
-                'Services': 'cat-services',
-                'Health & Wellness': 'cat-health',
-                'Retail': 'cat-retail'
+            const businessImageMap = {
+                1: 'https://images.unsplash.com/photo-1445116572660-236099ec97a0?auto=format&fit=crop&w=1200&q=80',
+                2: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80',
+                3: 'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1200&q=80',
+                4: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=1200&q=80',
+                5: 'https://images.unsplash.com/photo-1551183053-bf91a1d81141?auto=format&fit=crop&w=1200&q=80',
+                6: 'https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&w=1200&q=80',
+                7: 'https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=1200&q=80',
+                8: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1200&q=80',
+                9: 'https://images.unsplash.com/photo-1483695028939-5bb13f8648b0?auto=format&fit=crop&w=1200&q=80',
+                10: 'https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=1200&q=80'
             };
-            const headerClass = categoryClassMap[business.category] || '';
+            const normalizedCategory = String(business.category || '').toLowerCase();
+            let headerClass = 'cat-default';
+            if (normalizedCategory.includes('food') || normalizedCategory.includes('dining')) {
+                headerClass = 'cat-food';
+            } else if (normalizedCategory.includes('service')) {
+                headerClass = 'cat-services';
+            } else if (normalizedCategory.includes('health') || normalizedCategory.includes('wellness')) {
+                headerClass = 'cat-health';
+            } else if (normalizedCategory.includes('retail')) {
+                headerClass = 'cat-retail';
+            }
+            const businessImage = businessImageMap[business.id] || 'https://picsum.photos/id/1043/1200/800';
             const recentReviews = business.reviews.slice(-2);
             const reviewOffset = business.reviews.length - recentReviews.length;
 
             return `
                 <div class="business-card">
-                    <div class="business-header ${headerClass}">
+                    <div class="business-header ${headerClass}" style="--business-image: url('${businessImage}');">
                         <div class="business-name">${business.name}</div>
                         <span class="business-category">${business.category}</span>
                     </div>
@@ -2228,6 +2383,7 @@
         // Filter Functions
         function filterReviews(type, buttonElement) {
             currentFilter = type;
+            currentCategory = 'all';
             
             document.querySelectorAll('.filter-btn').forEach(btn => {
                 btn.classList.remove('active');
@@ -2236,13 +2392,33 @@
                 buttonElement.classList.add('active');
             }
 
+            const categoryButtons = document.querySelectorAll('.category-pill');
+            categoryButtons.forEach(pill => pill.classList.remove('active'));
+            if (categoryButtons[0]) categoryButtons[0].classList.add('active');
+            updateTopControlLabels();
+
             applyCurrentFilter();
         }
 
         function getFilteredBusinesses() {
             let filtered = [...allBusinesses];
             if (currentCategory !== 'all') {
-                filtered = filtered.filter(b => b.category === currentCategory);
+                filtered = filtered.filter(b => {
+                    const categoryText = String(b.category || '').toLowerCase();
+                    if (currentCategory === 'food') {
+                        return categoryText.includes('food') || categoryText.includes('dining');
+                    }
+                    if (currentCategory === 'services') {
+                        return categoryText.includes('service');
+                    }
+                    if (currentCategory === 'health') {
+                        return categoryText.includes('health') || categoryText.includes('wellness');
+                    }
+                    if (currentCategory === 'retail') {
+                        return categoryText.includes('retail');
+                    }
+                    return categoryText === currentCategory;
+                });
             }
 
             if (currentFilter === 'positive') {
@@ -2298,6 +2474,13 @@
             };
             
             document.getElementById(sectionMap[section]).classList.add('active');
+            const topControls = document.getElementById('browseTopControls');
+            if (topControls) {
+                topControls.classList.toggle('hidden', section !== 'browse');
+            }
+            if (section !== 'browse') {
+                closeDropdowns();
+            }
 
             if (section === 'browse') {
                 applyCurrentFilter();
@@ -2489,7 +2672,7 @@
             // Observe all animatable elements
             const animateOnScroll = () => {
                 const elements = document.querySelectorAll(
-                    '.business-card, .nav-taskbar, .filter-controls, .search-bar, .section-header, .stat-item'
+                    '.business-card, .nav-taskbar, .top-action-row, .search-bar, .section-header, .stat-item'
                 );
                 elements.forEach(el => observer.observe(el));
             };
@@ -2537,8 +2720,15 @@
 
         // Initialize on page load
         window.addEventListener('load', () => {
+            updateTopControlLabels();
             initScrollAnimations();
+            document.addEventListener('click', (event) => {
+                if (!event.target.closest('.dropdown-wrap')) {
+                    closeDropdowns();
+                }
+            });
         });
     </script>
 </body>
 </html>
+
